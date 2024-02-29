@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Check if the user with the specified username already exists
-        $existingUser = User::where('username', 'admin')->first();
+        $existingUser = User::where('email', 'admin')->first();
 
         if (!$existingUser) {
             // User doesn't exist, so create it
