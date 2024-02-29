@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             // User doesn't exist, so create it
             $adminUser = User::create([
                 'name' => 'Admin',
-                'username' => 'admin',
+                'email' => 'admin',
                 'password' => bcrypt('iddrivesadmin'), // Use bcrypt() to hash the password
                 'agn' => '',
                 'brn' => '',
