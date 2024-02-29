@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" placeholder="Password" value="11111111" name="password" required
+                                    id="password" placeholder="Password" value="iddrivesadmin" name="password" required
                                     autocomplete="current-password">
                                 <label for="password">Password</label>
                                 @error('password')
