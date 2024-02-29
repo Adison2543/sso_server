@@ -23,14 +23,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::tokensExpireIn(now()->addDays(1));
         Passport::refreshTokensExpireIn(now()->addDays(30));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
         Passport::tokensCan([
             "view-user" => "View user information",
-            "i-prompt" => "View user information",
-            "kst-plus" => "View user information"
+            "i-prompt" => "Access I-Prompt",
+            "kst-plus" => "Access KST-Plus"
         ]);
 
         Passport::useClientModel(ModelsPassport::class);

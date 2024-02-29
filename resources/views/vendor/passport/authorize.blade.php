@@ -7,106 +7,102 @@
 
     <title>{{ config('app.name') }} - Authorization</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style>
-        .passport-authorize .container {
-            margin-top: 30px;
+        #bgid {
+            background-image: url('/imgs/bg.jpg');
+            background-size: cover;
+        }
+        #main {
+            background-color:rgba(255, 255, 255, 0.6);
+        }
+        #submitbtn {
+            background-color: #FC5F2B;
+            color: white;
         }
 
-        .passport-authorize .scopes {
-            margin-top: 20px;
+        #submitbtn:hover {
+            background-color: #D15126;
+            color: white;
         }
-
-        .passport-authorize .buttons {
-            margin-top: 25px;
-            text-align: center;
+        #copyright{
+            width: 300px;
         }
-
-        .passport-authorize .btn {
-            width: 125px;
-        }
-
-        .passport-authorize .btn-approve {
-            margin-right: 15px;
-        }
-
-        .passport-authorize form {
-            display: inline;
+        @media (max-width: 400px) {
+            #copyright{
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body class="passport-authorize">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card card-default">
-                    <div class="card-header">
-                        Authorization Request
-                    </div>
-                    <div class="card-body">
-                        <!-- Introduction -->
-                        <p>
-                            Hey {{ auth()->user()->name }}, <br>
-                            <strong>{{ $client->name }}</strong> is requesting permission to access your account.
-                        </p>
-
-                        <!-- Scope List -->
-                        @if (count($scopes) > 0)
-                            <div class="scopes">
-                                    <p><strong>This application will be able to:</strong></p>
-
-                                    <ul>
-                                        @foreach ($scopes as $scope)
-                                            <li>{{ $scope->description }}</li>
-                                        @endforeach
-                                    </ul>
+<body id="bgid" class="vh-100">
+    <div id="app" class="h-100">
+        <main class="py-4 h-100" id="main">
+            <div class="container h-100">
+                <div class="d-flex justify-content-center align-items-center w-100 h-100">
+                    <div class="card shadow w-md-25">
+                        <div class="card-body">
+                            <div class="text-center py-3">
+                                <img src="/imgs/logoid_new.png" width="100" alt="">
+                                <h1 class="m-0 fw-bold"><span style="color: #F15A29">ID</span> Drives</h1>
+                                <p class="mb-0"><span class="fw-bold" style="color: #F15A29">One</span> account for <span class="fw-bold"
+                                        style="color: #F15A29">all</span> apps.</p>
                             </div>
-                        @endif
-
-                        <div class="buttons">
-                            <!-- Authorize Button -->
-                            <form method="post" action="{{ route('passport.authorizations.approve') }}">
-                                @csrf
-
-                                <input type="hidden" name="state" value="{{ $request->state }}">
-                                <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
-                                <input type="hidden" name="auth_token" value="{{ $authToken }}">
-                                <button type="submit" class="btn btn-success btn-approve">Authorize</button>
-                            </form>
-
-                            <!-- Cancel Button -->
-                            <form method="post" action="{{ route('passport.authorizations.deny') }}">
-                                @csrf
-                                @method('DELETE')
-
-                                <input type="hidden" name="state" value="{{ $request->state }}">
-                                <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
-                                <input type="hidden" name="auth_token" value="{{ $authToken }}">
-                                <button class="btn btn-danger">Cancel</button>
-                            </form>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-12" style="text-align: center">
-                                <form method="post" action="{{ route('different-account') }}" style="display: inline-block;">
+                            <div class="mb-3 text-center">
+                                <p class="fs-4">ลงทะเบียนด้วยชื่อผู้ใช้</p>
+                                <!-- Authorize Button -->
+                                <form method="post" action="{{ route('passport.authorizations.approve') }}">
                                     @csrf
 
-                                    <input type="hidden" name="current_url" value="{{ $request->fullUrl() }}">
-                                    <button type="submit" class="btn btn-success btn-block" style="width: auto">Not {{ auth()->user()->name }}? Login again</button>
+                                    <input type="hidden" name="state" value="{{ $request->state }}">
+                                    <input type="hidden" name="client_id" value="{{ $client->getKey() }}">
+                                    <input type="hidden" name="auth_token" value="{{ $authToken }}">
+                                    <button type="submit" class="btn-approve btn btn-outline-primary w-100">
+                                        <div class="d-flex justify-content-center text-start w-100 gap-4">
+                                            <div class="fs-2 text-center">
+                                                <i class="bi bi-person-circle"></i>
+                                            </div>
+                                            <div class="">
+                                                <h5 class="mb-0">{{ auth()->user()->name }}</h5>
+                                                <p class="mb-0">ฝ่าย: {{ auth()->user()->getDpm->name }} สาขา: {{ auth()->user()->getBrn->name }}</p>
+                                            </div>
+                                        </div>
+                                    </button>
                                 </form>
+                            </div>
+                            <div class="d-flex justify-content-center gap-2 mb-2">
+                                <div class="" style="text-align: center">
+                                    <form method="post" action="{{ route('different-account') }}" style="display: inline-block;">
+                                        @csrf
+
+                                        <input type="hidden" name="current_url" value="{{ $request->fullUrl() }}">
+                                        <button type="submit" class="btn btn-sm btn-success btn-block" style="width: auto">Not {{ auth()->user()->name }}? Login again</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center" id="copyright">
+                                <i class="bi bi-c-circle"> </i>
+                                <p class="m-0">{{ now()->format('Y') }} iddrives .co.ltd</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>
