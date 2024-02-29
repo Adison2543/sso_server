@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="">
                                                 <h5 class="mb-0">{{ auth()->user()->name }}</h5>
-                                                <p class="mb-0">ฝ่าย: {{ auth()->user()->getDpm->name }} สาขา: {{ auth()->user()->getBrn->name }}</p>
+                                                <p class="mb-0">ฝ่าย: {{ optional(auth()->user()->getDpm)->name }} สาขา: {{ optional(auth()->user()->getBrn)->name }}</p>
                                             </div>
                                         </div>
                                     </button>
