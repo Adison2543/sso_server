@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="">
                                                 <h5 class="mb-0">{{ auth()->user()->name }}</h5>
-                                                <p class="mb-0">ฝ่าย: {{ optional(auth()->user()->getDpm)->name }} สาขา: {{ optional(auth()->user()->getBrn)->name }}</p>
+                                                <p class="mb-0" style="max-width: 200px;">ฝ่าย: {{ optional(auth()->user()->getDpm)->name }} สาขา: {{ optional(auth()->user()->getBrn)->name }}</p>
                                             </div>
                                         </div>
                                     </button>
@@ -90,7 +90,10 @@
                                         @csrf
 
                                         <input type="hidden" name="current_url" value="{{ $request->fullUrl() }}">
-                                        <button type="submit" class="btn btn-sm btn-success btn-block" style="width: auto">Not {{ auth()->user()->name }}? Login again</button>
+                                        @php
+                                            $fname =  explode(' ', auth()->user()->name);
+                                        @endphp
+                                        <button type="submit" class="btn btn-sm btn-success btn-block" style="width: auto">Not {{ $fname ? $fname[0] : '' }}? Login again</button>
                                     </form>
                                 </div>
                             </div>
