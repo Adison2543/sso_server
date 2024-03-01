@@ -7,7 +7,7 @@
         <p class="mb-0">Dpm: <span class="text-decoration-underline ms-2">{{ optional($user->getDpm)->name }}</span></p>
         <p class="mb-0">Dpm: <span class="text-decoration-underline ms-2">{{ optional($user->getBrn)->name }}</span></p>
         <p class="mb-0">Dpm: <span class="text-decoration-underline ms-2">{{ optional($user->getAgn)->name }}</span></p>
-        <p class="mb-0">Role: <span class="text-decoration-underline ms-2">{{ $user->row ? $user->ro : '-' }}</span></p>
+        <p class="mb-0">Role: <span class="text-decoration-underline ms-2">{{ $user->role ? $user->role : '-' }}</span></p>
     </div>
 
     <p class="fw-bold">User Permission</p>
