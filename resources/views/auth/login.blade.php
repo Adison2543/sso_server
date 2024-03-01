@@ -19,7 +19,7 @@
                                 <input type="text" class="form-control @error('email') is-invalid @enderror"
                                     value="admin" name="email" required autofocus autocomplete="email" id="email"
                                     placeholder="Username">
-                                <label for="email">Username</label>
+                                <label for="email">ชื่อผู้ใช้</label>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     id="password" placeholder="Password" value="iddrivesadmin" name="password" required
                                     autocomplete="current-password">
-                                <label for="password">Password</label>
+                                <label for="password">รหัสผ่าน</label>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="w-100">
                                 <button type="submit" class="btn w-100" id="submitbtn">
-                                    {{ __('Login') }}
+                                    เข้าสู่ระบบ
                                 </button>
                             </div>
                         </form>
