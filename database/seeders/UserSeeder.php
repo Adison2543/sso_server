@@ -35,6 +35,9 @@ class UserSeeder extends Seeder
 
             $this->command->info("User Admin created successfully.");
         } else {
+            if (!($existingUser->hasRole('admin'))) {
+                $existingUser->assignRole('admin');
+            }
             // User already exists, display a message
             $this->command->info("User Admin already exists.");
         }
